@@ -58,7 +58,6 @@ $monsters = getMonsters();
                 </thead>
                 <tbody>
                     <?php 
-					echo var_dump($monsters);
 					foreach ($monsters as $monster) { ?>
                         <tr>
                             <td><?php echo $monster->name; ?></td>

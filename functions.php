@@ -15,8 +15,14 @@ function getMonsters()
 	$query = "SELECT * FROM monster";
     $result = $dbh -> query($query);
 	$monsters = $result->fetchAll();
-	
-	return $monsters;
+	$tab = new ArrayObject(array());
+	foreach($monsters as $monst){
+		$monster = new Monster($monst['name'], $monst['strength'], $monst['type'], $monst['life']);
+		
+		$tab->append($monster);
+	}
+	$dbh = null;
+	return $tab;
 }
 
 /**
