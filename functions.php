@@ -11,12 +11,10 @@ function getMonsters()
 		foreach($json as $monster){
 			$monsterOb= new Monster($monster->name, $monster->strength, $monster->type, $monster->life);
 			
-			$arrayObj->append($monsterOb);
+			$arrayObj->offsetSet($monsterOb->name, $monsterOb);
 			
 		}
 		return $arrayObj;
-		
-	
 }
 
 /**
