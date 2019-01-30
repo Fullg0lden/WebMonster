@@ -57,7 +57,9 @@ $monsters = getMonsters();
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($monsters as $monster) { ?>
+                    <?php 
+					echo var_dump($monsters);
+					foreach ($monsters as $monster) { ?>
                         <tr>
                             <td><?php echo $monster->name; ?></td>
                             <td><?php echo $monster->strength; ?></td>
