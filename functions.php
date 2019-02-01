@@ -23,6 +23,13 @@ function setMonster($name, $strength, $life, $type){
 	$query = "INSERT INTO monster VALUES ('".$name."', ".$strength.", '".$type."',".$life.")";
 	$dbh->query($query);
 }
+
+function removeMonster($name){
+	$dbh = connexion();
+	
+	$query = "DELETE FROM monster WHERE name = '".$name."'";
+	$dbh->query($query);
+}
 function connexion(){
 	$dsn = 'mysql:host=localhost;dbname=monsters';
 	$username = 'root';

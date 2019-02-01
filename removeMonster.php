@@ -2,15 +2,10 @@
 
 require __DIR__ . '/functions.php';
 
-
-
 $monsterName = isset($_POST['monsterName']) ? $_POST['monsterName'] : null;
-$monsterStrength = isset($_POST['monsterStrength']) ? $_POST['monsterStrength'] : null;
-$monsterLife = isset($_POST['monsterLife']) ? $_POST['monsterLife'] : null;
-$monsterType = isset($_POST['monsterType']) ? $_POST['monsterType'] : null;
 
-if (!is_null($monsterName) && !is_null($monsterStrength)&&!is_null($monsterType) && !is_null($monsterLife)) {
-    setMonster($monsterName, $monsterStrength, $monsterLife, $monsterType);
+if (!is_null($monsterName)) {
+    removeMonster($monsterName);
 }
 $monsters = getMonsters();
 ?>
@@ -55,34 +50,20 @@ $monsters = getMonsters();
 		</div>
 		
 			<div class="row justify-content-md-center m-4">
-			  <form method="POST" action="addMonster.php">
-				<div class="form-row">
-					<div class="form-group m-1">
-						<label for="MonsterName">Enter a Monster Name</label>
-						<input type="text" class="form-control" id="MonsterName" placeholder="exampleMonster" name="monsterName">
-					</div>
-					<div class="form-group m-1">
-						<label for="Strength">Enter your Monster's strength</label>
-						<input type="number" class="form-control" id="Strength" placeholder="ex: 150" name="monsterStrength">
-					</div>
-				</div>
-				<div class="form-row">
-					<div class="form-group m-1">
-						<label for="Life">Enter your Monster'life</label>
-						<input type="number" class="form-control" id="Life" placeholder="ex : 250" name="monsterLife">
-					</div>
+			  <form method="POST" action="removeMonster.php">
+				
 						<div class="form-group m-1">
-							<label for="exampleFormControlSelect1">Choose your Monster's type</label>
-								<select class="form-control" id="exampleFormControlSelect1" name="monsterType">
-								  <option value="air">air</option>
-								  <option value="earth">earth</option>
-								  <option value="water">water</option>
-								  <option value="fire">fire</option>
+							<label for="remove">Choose the monster you want to see dying !</label>
+								<select class="form-control" id="remove" name="monsterName">
+								 <option value="">Choose a Monster</option>
+								<?php foreach ($monsters as  $monster) { ?>
+									<option value="<?php echo $monster->name; ?>"><?php echo $monster->name; ?></option>
+								<?php } ?>
 							</select>
 					 </div>
 				</div>
 				<div class="row justify-content-md-center">
-					<button class="btn btn-success" type="submit">Add !</button>
+					<button class="btn btn-success" type="submit">Kill !</button>
 				</div>
 			</form>
 			</div>

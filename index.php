@@ -47,7 +47,7 @@ $monsters = getMonsters();
 		<div class="container">
 			<div class="row justify-content-around m-3">
 				<a class="btn btn-primary" href="addMonster.php" role="button">Add Monster</a>
-				<a class="btn btn-danger" href="fight.php" role="button">Remove Monster</a>
+				<a class="btn btn-danger" href="removeMonster.php" role="button">Remove Monster</a>
 			</div>
 		</div>
 		
