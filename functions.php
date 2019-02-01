@@ -2,15 +2,7 @@
 require __DIR__ . '/Monster.php';
 function getMonsters()
 {
-	$dsn = 'mysql:host=localhost;dbname=monsters';
-	$username = 'root';
-	$password = 'root';
-	
-	try{
-	$dbh = new PDO($dsn, $username, $password);
-	}catch(Exception $e){
-		die("Erreur : ".$e->getMessage());
-	}
+	$dbh=connexion();
 	
 	$query = "SELECT * FROM monster";
     $result = $dbh -> query($query);
@@ -25,6 +17,24 @@ function getMonsters()
 	return $tab;
 }
 
+function setMonster($name, $strength, $life, $type){
+	$dbh = connexion();
+	
+	$query = "INSERT INTO monster VALUES ('".$name."', ".$strength.", '".$type."',".$life.")";
+	$dbh->query($query);
+}
+function connexion(){
+	$dsn = 'mysql:host=localhost;dbname=monsters';
+	$username = 'root';
+	$password = 'root';
+	
+	try{
+	$dbh = new PDO($dsn, $username, $password);
+	}catch(Exception $e){
+		die("Erreur : ".$e->getMessage());
+	}
+	return $dbh;
+}
 /**
  * Our complex fighting algorithm!
  *

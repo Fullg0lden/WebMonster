@@ -4,7 +4,16 @@ require __DIR__ . '/functions.php';
 
 $monsters = getMonsters();
 
+$monsterName = isset($_POST['monsterName']) ? $_POST['monsterName'] : null;
+$monsterStrength = isset($_POST['monsterStrength']) ? $_POST['monsterStrength'] : null;
+$monsterLife = isset($_POST['monsterLife']) ? $_POST['monsterLife'] : null;
+$monsterType = isset($_POST['monsterType']) ? $_POST['monsterType'] : null;
+var_dump( $_POST['monsterName']);
 
+if (!is_null($monsterName) && !is_null($monsterStrength)&&!is_null($monsterType) && !is_null($monsterLife)) {
+    setMonster($monsterName, $monsterStrength, $monsterLife, $monsterType);
+	echo "coucou";
+}
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +29,7 @@ $monsters = getMonsters();
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">Monsters League</a>
+            <a class="navbar-brand" href="index.php">Monsters League</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -39,18 +48,46 @@ $monsters = getMonsters();
             </div>
         </nav>
 
-        <div class="jumbotron">
-            <h1 class="display-4">Hello, world!</h1>
-            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-            <hr class="my-4">
-        </div>
-		<div class="container">
-			<div class="row justify-content-around m-3">
-				<a class="btn btn-primary" href="addMonster.php" role="button">Add Monster</a>
-				<a class="btn btn-danger" href="fight.php" role="button">Remove Monster</a>
-			</div>
+       <div class="jumbotron jumbotron-fluid">
+		  <div class="container">
+			<h1 class="display-4">Please add a Monster !</h1>
+			<p class="lead">Make the best one !</p>
+		  </div>
 		</div>
 		
+			<div class="row justify-content-md-center m-4">
+			  <form method="POST" action="addMonster.php">
+				<div class="form-row">
+					<div class="form-group m-1">
+						<label for="MonsterName">Enter a Monster Name</label>
+						<input type="text" class="form-control" id="MonsterName" placeholder="exampleMonster" name="monsterName">
+					</div>
+					<div class="form-group m-1">
+						<label for="Strength">Enter your Monster's strength</label>
+						<input type="number" class="form-control" id="Strength" placeholder="ex: 150" name="monsterStrength">
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group m-1">
+						<label for="Life">Enter your Monster'life</label>
+						<input type="number" class="form-control" id="Life" placeholder="ex : 250" name="monsterLife">
+					</div>
+						<div class="form-group m-1">
+							<label for="exampleFormControlSelect1">Choose your Monster's type</label>
+								<select class="form-control" id="exampleFormControlSelect1" name="monsterType">
+								  <option value="air">air</option>
+								  <option value="earth">earth</option>
+								  <option value="water">water</option>
+								  <option value="fire">fire</option>
+							</select>
+					 </div>
+				</div>
+				<div class="row justify-content-md-center">
+					<button class="btn btn-success" type="submit">Add !</button>
+				</div>
+			</form>
+			</div>
+
         <div class="container">
             <table class="table table-hover">
                 <caption><i class="fas fa-info"></i> Members of the monster league</caption>
@@ -74,33 +111,6 @@ $monsters = getMonsters();
                     <?php } ?>
                 </tbody>
             </table>
-			
-			<form method="POST" action="fight.php">
-				<div class="row border p-3">
-					<div class="form-group col-md-6 offset-md-3">
-						<form method="POST" action="fight.php">
-							<h2 class="text-center">The battle</h2>
-							<select class="form-control" name="first_monster_name">
-								<option value="">Choose a Monster</option>
-								<?php foreach ($monsters as $key => $monster) { ?>
-									<option value="<?php echo $key; ?>"><?php echo $monster->name; ?></option>
-								<?php } ?>
-							</select>
-							<br>
-							<p class="text-center">AGAINST</p>
-							<br>
-							<select class="form-control" name="second_monster_name">
-								<option value="">Choose a Monster</option>
-								<?php foreach ($monsters as $key => $monster) { ?>
-									<option value="<?php echo $key; ?>"><?php echo $monster->name; ?></option>
-								<?php } ?>
-							</select>
-							<br>
-							<button class="btn btn-md btn-danger center-block" type="submit">Fight!</button>
-						
-					</div>
-				</div>
-			</form>
         </div>
 
         <footer>
